@@ -1572,3 +1572,16 @@ function courses_get_trending_courses()
 
     // select max(qg.grade), any_value(u.firstname),q.name from quiz_grades qg join user u on u.id = qg.userid join quiz q on q.id = qg.quiz group by qg.quiz;
 }
+
+function quiz_get_quiz_topper() {
+
+    global $CFG, $DB;
+
+    $sql = "SELECT u.id,max(qg.grade) as grade, any_value(u.firstname) as username, q.course, q.id as quizid,
+            q.name FROM {quiz_grades} qg JOIN user u
+            ON u.id = qg.userid JOIN {quiz} q ON q.id = qg.quiz GROUP BY qg.quiz ORDER BY q.name";
+
+    $course = $DB->get_records_sql($sql, []);
+
+    return $course;
+}

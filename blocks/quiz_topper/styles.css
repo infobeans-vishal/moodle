@@ -1,0 +1,39 @@
+.block_quiz_topper img.profilepicture {
+    height: 50px;
+    width: 50px;
+}
+
+.block_quiz_topper .quiz_topperitem.fullname {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.block_quiz_topper .quiz_topperitem.edit {
+    text-align: right;
+}
+
+.block_quiz_topper .content {
+    display: flex;
+}
+
+.block_quiz_topper .quiz_topperitem.picture img {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+}
+
+.block_quiz_topper .quiz_topperitem span {
+    font-weight: bold;
+}
+
+.block_quiz_topper .list_block {
+    background: red !important
+    border-box: 1px solid black
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
