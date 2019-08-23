@@ -24,7 +24,7 @@ global $CFG;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 // class block_trending_courses extends block_base
-class block_trending_courses extends block_list
+class block_trending_courses extends block_base
 {
     /**
      * Block initializations
@@ -45,20 +45,20 @@ class block_trending_courses extends block_list
         }
 
         $this->content         = new stdClass;
-        $this->content->items  = array();
-        $this->content->icons  = array();
 
         if (file_exists($courseslib_file)) {
             require_once($courseslib_file);
 
             if ($badges = courses_get_trending_courses()) {
                 $badges = json_decode(json_encode($badges), true);
+                $this->content->text = '<table width="100%"><tr><th width="70%">Course</th><th width="30%">Enrollments</th></tr>';
                 foreach ($badges as $badge) {
-                    array_push($this->content->items, html_writer::tag('a', $badge['fullname'] , array('href' => $CFG->wwwroot.'/course/view.php?id='.$badge['id'])));
+                    $this->content->text .= '<tr><td><a class="ellipsis" href="'.$CFG->wwwroot.'/course/view.php?id='.$badge['id'].'">'.ucfirst($badge['fullname']).'</a></td> <td align="center">'.$badge['enrolments'].'</td></tr>';
                 }
+                $this->content->text .= '</table>';
 
             } else {
-                $this->content->item .= get_string('nothingtodisplay', 'block_trending_courses');
+                $this->content->text .= get_string('nothingtodisplay', 'block_trending_courses');
             }
         }
 
